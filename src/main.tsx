@@ -6,15 +6,20 @@ import './index.css'
 import {Provider} from 'react-redux';
 import createSagaMiddleWare from 'redux-saga';
 import {configureStore} from '@reduxjs/toolkit';
+import notesReducer from './notesState';
 
 const saga = createSagaMiddleWare();
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    notes: notesReducer,
+  },
   middleware: [saga],
 }); 
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
 )
